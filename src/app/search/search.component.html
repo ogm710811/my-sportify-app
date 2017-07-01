@@ -1,0 +1,54 @@
+<div class="container">
+    <!-- search panel -->
+    <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="input-group has-success">
+                <input type="text" class="form-control" placeholder="Search for..." #search 
+                    (keydown.enter)="searchTrack( search )"
+                >
+                <span class="input-group-btn">
+                    <button class="btn btn-secondary btn-success" type="button" (click)="searchTrack( search )">Go!</button>
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+        <hr>
+    </div>
+    <!--<hr>
+    <div class="row" *ngIf="!trackResult">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="alert alert-warning" role="alert">
+                <strong>Warning!</strong> No tracks were found with the term {{ query }}
+            </div>
+        </div>
+    </div>-->
+    <!-- search result from here .. -->
+    <hr>
+    <div *ngIf="trackResults.length">
+        <div class="card-deck">    
+        <div class="row">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" >
+            <div class="card" >
+            <img class="card-img-top" [src]="trackResults.album.images[0].url" alt="Card image cap" height="180px">
+            <div class="card-block">
+                <!--<h5 class="card-title">{{ track.artists[0].name }}</h5>
+                <p class="card-text">{{ track.album.name }}</p>-->
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+<pre>{{ trackResults | json }} </pre>
+
+
+ 
+ 
+ 
+ 

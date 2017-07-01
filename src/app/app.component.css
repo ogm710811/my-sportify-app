@@ -1,0 +1,10 @@
+.navbar-brand, .active>.nav-link {
+    color: #fff;
+}
+.navbar-brand:hover{
+    color: #449d44;
+}
+
+.active>.nav-link:hover{
+    color: #449d44;
+}
