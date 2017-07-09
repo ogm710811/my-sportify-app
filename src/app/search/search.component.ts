@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Router } from '@angular/router';
 
 // SERVICES here ..
 import { SpotifyService } from '../services/spotify.service';
@@ -24,13 +25,7 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  getMyTracks() {
-    this.tracks.getTracks()
-      .subscribe((tracks) => this.myTracks = tracks);
-  }
-
   searchTrack( search ) : void {
-    
     this.query = search.value;
 
     if (!this.query) {
@@ -39,10 +34,11 @@ export class SearchComponent implements OnInit {
     console.log( this.query );
     
     this.tracks.searchTrack( this.query )
-      .subscribe(( track ) => this.trackResults = track);
-   
-    // clear html input
-    search.value = null;
+      //.subscribe(( track ) => this.trackResults = track);
+      .subscribe(res => {
+        console.log(res.tracks.items);
+        this.trackResults = res.tracks.items;
+      })
   }
 
 

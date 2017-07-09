@@ -4,34 +4,31 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class SpotifyService {
+  private accessToken: string = 
+    'access_token=BQAC1mzaQ40WwpB4n7e4YpG7-DabpwFNXpJoeFmrR8WSxAabFcmy-ZU5B7lwZX2s9iT48mBdOKYcCwbxxmi2GbiV0GaDu_Jamtqfqr36LsCPvp1mbWNrOnkab9Nv2hrP5KQ6UtZto7NR9o6D7ycbkPif3J73W1vT5Xfq1DCSGNzfnrrCrh6VZ4ntPVQzaCRxYTE1TVvguEiEhokbppVFgGTCFim8deSZL-ofFX34aZ8_wKM';
+    private searchUrl: string;
+    private artistUrl: string;
   
   constructor( private http : Http) { }
-
-  getTracks(){
-    const spotifyApiUrl = 'https://api.spotify.com/v1/me/tracks';
-    const params: string = 
-    'access_token=BQCIm0C8Emo1e9eM-uCYeyAWjKmsBUb-tUh2eZcpubemcOmrt01s5kAqgMsOwANr5knd9Yfu2uZZe2hdkOfpNMn21jCE3tQWW_pwoOwEpU_Q9RK0rbC7kHQgv6Es-bITpnF3bjvDL6KWj81Va4skPKtKzGYZS7Oj5xRK6KmsFOq5Tfizqqv4O94MUie6BUf2MaRmFHq3UCmc2Xhz0QSRRgUFPNmirTEivhixcpQ';
-
-    const queryUrl = `${ spotifyApiUrl }?${ params }`
-
-    return this.http.get(queryUrl)
-        .map((res) => res.json());
-  }
-
 
   searchTrack( query : string ){
     let params: string = [
       `q=${ query }`,
       `type=track`
-    ].join('&')
-    
-    const accessToken: string = 
-    'access_token=BQBUNI-Np-2B1F9zIU_NJ8IqD18gzerbPrUaBSEb2DuIjJt_rjfIYogZKJEV1DVTM2hFmMasHJycgQrJvPzOxA4DJTZ0hSg5EJrwl-zdwWfn43YB1vV9ZWPayizQ1qqMp7LjJx2kM-kA8nHC3UUWyWH-jJC7GmfEqPiDJwXMkF26-sC_QST_9aLObpeZHoMM0jSmmclcNdQizxz-to1U1puiHvU4kuTd5p0ItFA';
+    ].join('&');    
 
-    const spotifyApiUrl: string = `https://api.spotify.com/v1/search?${ params }&${ accessToken }`;
+    this.searchUrl = `https://api.spotify.com/v1/search?${ params }&${ this.accessToken }`;
 
-    return this.http.get( spotifyApiUrl )
+    return this.http.get( this.searchUrl )
       .map((res: Response) => res.json());
   }
 
-}
+  getArtist( id : string ){
+    this.artistUrl = `https://api.spotify.com/v1/artists/${ id }?${ this.accessToken }`;
+
+    return this.http.get( this.artistUrl )
+      .map((res: Response) => res.json());
+  }
+
+}// end class SpotifyService
+

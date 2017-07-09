@@ -1,3 +1,18 @@
-<p>
-  artist works!
-</p>
+<div class="container">
+  <div *ngIf="artist">
+    <div class="media" style="background-color: #333; border-color: #333; color: #fff;">
+      <div *ngIf="artist.images.length > 0">
+        <img class="d-flex align-self-center mr-3" style="border-radius: 50%;" [src]="artist.images[0].url" alt="Generic placeholder image" height="200px">
+      </div>
+      <div class="media-body">
+        <br>
+        <h5 class="mt-0">{{ artist.name }}</h5>
+        <p class="mb-0" *ngIf="artist.genres.length > 0">
+          Genres: <span *ngFor="let genre of artist.genres">{{ genre }}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

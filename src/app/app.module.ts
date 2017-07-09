@@ -11,6 +11,11 @@ import { AlbumComponent } from './album/album.component';
 import { TrackComponent } from './track/track.component';
 import { SpotifyService } from './services/spotify.service';
 
+const routes: Routes = [
+  { path: '',            component: SearchComponent },
+  { path: 'artist/:id',  component: ArtistComponent },
+  { path: '**',          redirectTo: '' }
+];
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,8 @@ import { SpotifyService } from './services/spotify.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule           
+    HttpModule,
+    RouterModule.forRoot(routes)  //  <!-- "routes" is the array defined above
   ],
   providers: [SpotifyService],
   bootstrap: [AppComponent]
